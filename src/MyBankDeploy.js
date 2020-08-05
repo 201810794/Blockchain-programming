@@ -1,0 +1,18 @@
+var Web3=require('web3');
+var web3;
+if (typeof web3 !== 'undefined') {
+    web3 = new Web3(web3.currentProvider);
+} else {
+    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8445"));
+}
+var _abiArray=[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"deposit","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"getBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getBalanceOfOwner","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getBalanceOfThis","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address payable","name":"receiver","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferTo","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"payable":true,"stateMutability":"payable","type":"function"}];
+var _bin="608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055503073ffffffffffffffffffffffffffffffffffffffff16316001819055506103188061007e6000396000f3fe6080604052600436106100555760003560e01c806312065fe01461005a5780632ccb1b30146100855780632e1a7d4d146100d3578063934d85b414610101578063b6b55f251461012c578063d8c245411461015a575b600080fd5b34801561006657600080fd5b5061006f610185565b6040518082815260200191505060405180910390f35b6100d16004803603604081101561009b57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019092919050505061018f565b005b6100ff600480360360208110156100e957600080fd5b81019080803590602001909291905050506101ea565b005b34801561010d57600080fd5b50610116610265565b6040518082815260200191505060405180910390f35b6101586004803603602081101561014257600080fd5b8101908080359060200190929190505050610284565b005b34801561016657600080fd5b5061016f6102a3565b6040518082815260200191505060405180910390f35b6000600154905090565b806001600082825403925050819055508173ffffffffffffffffffffffffffffffffffffffff166108fc829081150290604051600060405180830381858888f193505050501580156101e5573d6000803e3d6000fd5b505050565b806001600082825403925050819055506000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc829081150290604051600060405180830381858888f19350505050158015610261573d6000803e3d6000fd5b5050565b60003073ffffffffffffffffffffffffffffffffffffffff1631905090565b80341461029057600080fd5b8060016000828254019250508190555050565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163190509056fea265627a7a72315820469ddebc9ba97a3420faf0ffc816b37e6734ed4f77b884c6a1274116defc0e7264736f6c634300050c0032";
+var _contract = new web3.eth.Contract(_abiArray);
+//unlock the account with a password provided
+//web3.personal.unlockAccount(web3.eth.accounts[0],'password');
+_contract
+    .deploy({data:"0x"+_bin})
+    .send({from: "0x52cadd19f40f5f5f544f33fde2f8fc118862e4f9", gas: 364124, gasPrice: '100000'})
+    .then(function(newContractInstance){
+        console.log(newContractInstance.options.address) // instance with the new contract address
+    });

@@ -1,0 +1,11 @@
+var Web3=require('web3');
+var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8345"));
+var abi =[{"constant":false,"inputs":[],"name":"add","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getCounter","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"timePassed","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getNowtime","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"start","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}];
+var addr = "0x84f5F26495B178d0218359620C09Dd4A8B3d6934";
+var tmcnt = new web3.eth.Contract(abi,addr);
+//tmcnt.methods.getNowtime().call().then(function(value) {console.log('start time: ',value);});
+//tmcnt.methods.start().send({from:"0x515991659AEbb7fA3c7001968F9629bd605971e2",gas:100000});
+tmcnt.methods.add().send({from:"0x515991659AEbb7fA3c7001968F9629bd605971e2",gas:100000});
+tmcnt.methods.getCounter().call().then(function(str) {console.log('counter: ',str);});
+tmcnt.methods.timePassed().call().then(function(value) {console.log('Passed time: %d',value);});
+//counter.methods.getCounter().call().then(function(str) {console.log(str);});
