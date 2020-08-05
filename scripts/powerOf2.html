@@ -1,0 +1,22 @@
+<!doctype>
+<html>
+<head>
+<script src="..\node_modules\web3\dist\web3.min.js"></script>
+<script type="text/javascript">
+    var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8446"));
+    function displayPowerof2() {
+    
+        var math = new web3.eth.Contract([{"constant":false,"inputs":[{"name":"input","type":"uint256"}],"name":"PowerOf2","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getResult","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}],"0x2D5184d273542aBE71bBcfdc2Eb54d27CC685c12");
+        math.methods.getResult().call().then(function(value) {
+                                   document.getElementById('result').innerText = "The message from blockchain: " + value;         
+        });
+    }
+</script>
+</head>
+<body>
+    <h1>Function 'powerOf2' Result</h1>
+    <button type="button" onClick="displayPowerof2();">Display Result</button>
+    <div></div>
+    <div id="result"></div>
+</body>
+</html>
